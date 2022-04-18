@@ -1,0 +1,103 @@
+*,
+*:is(::before, ::after) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: rgb(26, 26, 26);
+  --color-text: rgb(255, 115, 0);
+  --color-text-ascent: rgb(255, 204, 163);
+  --color-text-contrast: rgb(121, 55, 0);
+  --color-default: rgb(35, 35, 35);
+  --ft-title: "Corben", "system-ui", cursive;
+  --timing: 300ms;
+}
+
+body {
+  min-block-size: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.container {
+  --container-spacing: 2ch;
+  display: grid;
+  place-items: center;
+  gap: var(--container-spacing);
+  width: 100%;
+  padding: var(--container-spacing);
+}
+
+.container > *:first-child { justify-self: start; }
+
+.generator {
+  --size: min(700px, 100%);
+  aspect-ratio: 1 / 1;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.generator__layer {
+  --ratio: 85%;
+  display: inherit;
+  place-items: center;
+  position: relative;
+  height: var(--ratio); width: var(--ratio);
+}
+
+.generator__btn {
+  font: 0.5rem "Poppins";
+  position: absolute;
+  right: 0; top: 0;
+  margin-block-start: 1ch;
+  margin-inline-end: 1ch;
+}
+
+.custom-bg {
+  background-color: var(--color-layer, var(--color-default));
+}
+
+.btn {
+  width: max-content;
+  padding: 0.75em 2em;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:is(:focus, :focus-visible) {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-bg),
+    0 0 0 4px var(--color-text);
+}
+
+.btn--container {
+  font: 1rem "Poppins";
+  background: var(--color-text);
+  color: var(--color-bg);
+  transition:
+    background var(--timing) ease-in-out,
+    color var(--timing) ease-in-out;
+}
+
+.title {
+  font-family: var(--ft-title), "system-ui", cursive;
+}
+
+@media (hover: hover) {
+  .btn--container:hover {
+    background-color: var(--color-text-contrast);
+    color: var(--color-text-ascent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --timing: linear;
+  }
+}
